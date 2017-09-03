@@ -1,3 +1,11 @@
+/************************************************
+Angular 2/4 App Component
+Path: /app/app.component.ts
+The app component is the root component of the application, it defines the root tag of the app as <app></app> with the selector property.
+
+The moduleId property is set to allow a relative path to be used for the templateUrl. 
+*************************************** */
+
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
