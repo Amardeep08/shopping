@@ -4,4 +4,6 @@ export class User {
     password: string;
     firstName: string;
     lastName: string;
+    emailId:string;
+    verified:boolean;
 }

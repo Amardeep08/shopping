@@ -5,34 +5,43 @@ The user service contains a standard set of CRUD methods for managing users, it 
 
 
 
-// import { Injectable } from '@angular/core';
-// import { Http, Headers, RequestOptions, Response } from '@angular/http';
-//  
-// import { User } from '../_models/index';
-//  
-// @Injectable()
-// export class UserService {
-//     constructor(private http: Http) { }
-//  
-//     getAll() {
-//         return this.http.get('/api/users', this.jwt()).map((response: Response) => response.json());
-//     }
-//  
-//     getById(id: number) {
-//         return this.http.get('/api/users/' + id, this.jwt()).map((response: Response) => response.json());
-//     }
-//  
-//     create(user: User) {
-//         return this.http.post('/api/users', user, this.jwt()).map((response: Response) => response.json());
-//     }
-//  
-//     update(user: User) {
-//         return this.http.put('/api/users/' + user.id, user, this.jwt()).map((response: Response) => response.json());
-//     }
-//  
-//     delete(id: number) {
-//         return this.http.delete('/api/users/' + id, this.jwt()).map((response: Response) => response.json());
-//     }
+import { Injectable } from '@angular/core';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
+ import { Observable, Subject } from 'rxjs/Rx';  
+import { User } from '../_models/user';
+ import 'rxjs/Rx'; //get everything from Rx  
+import 'rxjs/add/operator/toPromise'; 
+@Injectable()
+export class UserService {
+    apiUrl: string = "http://localhost:10296/api/values/";// Web API URL  
+    constructor(private http: Http) { }
+ 
+    getAll() : Observable<User[]>{
+        var respo= this.http.get(this.apiUrl).map((response: Response) => response.json())
+        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+        return respo;
+    }
+ 
+    getById(id: number) {
+        return this.http.get(this.apiUrl + id//, this.jwt()
+).map((response: Response) => response.json());
+    }
+ 
+    create(user: User) {
+    
+        return this.http.post(this.apiUrl, user//, this.jwt()
+).map((response: Response) => response.statusText);
+    }
+ 
+    update(user: User) {
+        return this.http.put(this.apiUrl+ user.id, user//, this.jwt()
+).map((response: Response) => response.statusText);
+    }
+ 
+    delete(id: number) {
+        return this.http.delete(this.apiUrl + id//, this.jwt()
+).map((response: Response) => response.statusText);
+    }
 //  
 //     // private helper methods
 //  
@@ -44,4 +53,4 @@ The user service contains a standard set of CRUD methods for managing users, it 
 //             return new RequestOptions({ headers: headers });
 //         }
 //     }
-// }
+}

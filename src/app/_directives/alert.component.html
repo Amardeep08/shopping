@@ -3,13 +3,73 @@ Path: /app/_directives/alert.component.html
 The alert component template contains the html for displaying alert messages at the top of the page.
  -->
 
+<!-- 
 
 
-<div *ngIf="message"
- [ngClass]="{
-      'alert': message,
-       'alert-success': message.type === 'success',       
-       'alert-danger': message.type === 'error' }"
->
-{{message.text}}
+<div
+*ngIf="message"
+[ngClass]="{
+     'modal-backdrop fade in': message
+      }"
+></div>
+<div 
+*ngIf="message"
+[ngClass]="{
+     'modal-backdrop fade in': message
+      }"
+       tabindex="-1" role="dialog" style="display: block" 
+[style.display]="message.type === 'success' ? 'block' : 'none'">
+   <div class="modal-dialog">
+      <div class="modal-popup">
+        <div class="popup-title">
+                <span *ngIf="message"
+                [ngClass]="{
+                     'alert': message,
+                      'alert-success': message.type === 'success',       
+                      'alert-danger': message.type === 'error' }"
+               >
+               {{message.type}}
+               </span>          
+                <i class="icon-cancel fr" data-dismiss="modal" aria-label="Close" (click)="cancelAction()"></i>
+                <p *ngIf="subTitle">{{subTitle}}</p>           
+        </div>
+      <ng-content></ng-content>
+    </div>
 </div>
+</div> -->
+<!-- <div  *ngIf="message" class="dialog">
+    
+        <button *ngIf="message" (click)="close()" aria-label="Close" class="dialog__close-btn">
+            X</button>
+    
+        <ng-content></ng-content>
+        <span *ngIf="message"
+        [ngClass]="{
+             'alert': message,
+              'alert-success': message.type === 'success',       
+              'alert-danger': message.type === 'error' }"
+       >
+       {{message.type}}
+       </span>  
+    </div>
+      <div *ngIf="message" class="overlay" (click)="close()">Close</div>
+    -->
+    <div  *ngIf="message && closable" class="dialog" >
+           
+            <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn">X</button>
+            <div *ngIf="message"
+            [ngClass]="{
+                 'alert': message,
+                  'alert-success': message.type === 'success',       
+                  'alert-danger': message.type === 'error' }"
+           >
+           {{message.text}}
+            </div>  
+        </div>
+          <div *ngIf="message && closable" class="overlay" (click)="close()"></div>
+    
+          <div *ngIf="visible" class="dialog">
+                <ng-content></ng-content>
+                <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn">X</button>
+              </div>
+              <div *ngIf="visible" class="overlay" (click)="close()"></div>

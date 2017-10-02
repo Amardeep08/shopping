@@ -10,8 +10,8 @@ This is where the fake backend provider is added to the application, to switch t
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-// import { FormsModule }    from '@angular/forms';
-//import { HttpModule } from '@angular/http';
+import { FormsModule }    from '@angular/forms';
+import { HttpModule } from '@angular/http';
  
 // // used to create fake backend
 // import { fakeBackendProvider } from './_helpers/index';
@@ -21,28 +21,40 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { routing }   from './app.routing';
 
-// import { AlertComponent } from './_directives/index';
+import { AlertComponent } from './_directives/alert.component';
 // import { AuthGuard } from './_guards/index';
 // import { AlertService, AuthenticationService, UserService } from './_services/index';
+import { AlertService } from './_services/alert.service';
+import { AuthenticationService } from './_services/authentication.service';
 import { HomeComponent } from './home/home.component';
-// import { LoginComponent } from './login/index';
-// import { RegisterComponent } from './register/index';
+ import { LoginComponent } from './login/login.component';
+ import { RegisterComponent } from './register/register.component';
 
-import {AlertComponent} from './_directives/alert.component'
+import {UserService} from './_services/user.servie'
 
 @NgModule({
-  declarations: [
-    AppComponent,AlertComponent,HomeComponent
-  ],
   imports: [
-    BrowserModule,routing
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+            BrowserModule,
+            FormsModule,
+            HttpModule,
+            routing
+        ],
+        declarations: [
+            AppComponent,
+            AlertComponent,
+            HomeComponent,
+         LoginComponent,
+            RegisterComponent
+        ],
+        providers: [
+      AuthenticationService,
+            AlertService,
+    UserService
+    ],
+       bootstrap: [AppComponent]
 })
 
 export class AppModule { }
-
 
 // @NgModule({
 //   imports: [
